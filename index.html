@@ -21,20 +21,18 @@
             <div class="mdc-top-app-bar__row">
               <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                 <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
-                <span class="mdc-top-app-bar__title">Title</span>
+                <span class="mdc-top-app-bar__title">World News</span>
               </section>
             </div>
-          </header>
-        <div class="greeting">
-          <div class="mdc-elevation--z18">Welcome to the World News Explorer app!
-            <!-- ... content ... -->
-          </div>
-          <div class="elevation-demo-surface mdc-elevation--z18">Welcome!</div>
-        </div>
-        
+          </header>        
     </body>
 
 </html>
 
 <script>
+  import {MDCTopAppBar} from '@material/top-app-bar';
+
+  // Instantiation
+  const topAppBarElement = document.querySelector('.mdc-top-app-bar');
+  const topAppBar = new MDCTopAppBar(topAppBarElement);
 </script>
