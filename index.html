@@ -9,10 +9,22 @@
         </script>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <script src="scripts.js"></script>
-        <style>@import "@material/elevation/mdc-elevation";</style>
+        <style>
+          @import "@material/elevation/mdc-elevation";
+          @import "@material/top-app-bar/mdc-top-app-bar";
+          @import "@material/icon-button/mdc-icon-button";
+        </style>
     </head>
     
     <body>
+        <header class="mdc-top-app-bar">
+            <div class="mdc-top-app-bar__row">
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button">menu</button>
+                <span class="mdc-top-app-bar__title">Title</span>
+              </section>
+            </div>
+          </header>
         <div class="greeting">
           <div class="mdc-elevation--z18">Welcome to the World News Explorer app!
             <!-- ... content ... -->
