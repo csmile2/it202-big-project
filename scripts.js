@@ -7,9 +7,15 @@ $(document).ready(function(){
     $.get("https://restcountries.eu/rest/v2/all", function(res){
         $.each(res, function(u,v){
             console.log(v);
-            $("#countriesView").append(
-                "<b>"+v.name+":</b></br>"
-            );
+
+            var cardClone = $(".cardTemplate").clone();
+            cardClone.find(".mdc-card__media-content").text(v.name);
+            cardClone.removeClass("cardTemplate");
+            $("#countriesView").append(cardClone);
+
+            // $("#countriesView").append(
+            //     "<b>"+v.name+":</b></br>"
+            // );
         });
 
     });
