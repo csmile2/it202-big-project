@@ -4,19 +4,35 @@
 // API: https://restcountries.eu/rest/v2/all
 
 $(document).ready(function(){
-    $.get("https://restcountries.eu/rest/v2/all", function(res){
-        $.each(res, function(u,v){
-            console.log(v);
-
-            var cardClone = $(".cardTemplate").clone();
-            cardClone.find(".mdc-card__media-content").text(v.name);
-            cardClone.removeClass("cardTemplate");
-            $("#countriesView").append(cardClone);
-
-            // $("#countriesView").append(
-            //     "<b>"+v.name+":</b></br>"
-            // );
+    // $.get("https://restcountries.eu/rest/v2/all", function(res){
+    //     $.each(res, function(u,v){
+    //         console.log(v);
+    //         var cardClone = $(".cardTemplate").clone();
+    //         cardClone.find(".mdc-card__media-content").text(v.name);
+    //         cardClone.removeClass("cardTemplate");
+    //         $("#countriesView").append(cardClone);
+    //     });
+    // });
+    var regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
+    var regionsLength = regions.length;
+    for(var i = 0; i < regionsLength; i++){
+        console.log(regions[i]);
+        var url = "https://restcountries.eu/rest/v2/region/"+regions[i];
+        console.log("Fetching from this url" + url);
+        $.get(url, function(res){
+            $.each(res, function(u,v){
+                // console.log(v);
+                var cardClone = $(".cardTemplate").clone();
+                cardClone.find(".mdc-card__media-content").text(v.name);
+                cardClone.removeClass("cardTemplate");
+                $("#countriesView").append(cardClone);
+            });
         });
+    }
+        
+    // region
+    // https://restcountries.eu/rest/v2/region/{region}
+    // Search by region: Africa, Americas, Asia, Europe, Oceania
 
-    });
+
 })
