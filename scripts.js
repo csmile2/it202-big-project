@@ -36,7 +36,7 @@ function drawByRegion(region){
             $("#countriesView").append(cardClone);
         });
     });
-    $("span:contains('Explore')").on("click", function(){
+    $(".mdc-card__media-content:contains('Explore')").on("click", function(){
         console.log($(this).attr("id"));
     });
 
