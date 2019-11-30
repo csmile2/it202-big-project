@@ -14,7 +14,7 @@ function drawRegionCards(){
         $("#countriesView").append(cardClone);
         cardClone.attr("id",regions[i]);
         cardClone.on("click", function(){
-            console.log($(this).attr("id"));
+            // console.log($(this).attr("id"));
             $("#countriesView").empty();
             drawByRegion($(this).attr("id"));
         });
@@ -30,13 +30,16 @@ function drawByRegion(region){
             var cardClone = $(".cardTemplate").clone();
             cardClone.find(".mdc-card__media-content").text(v.name);
             cardClone.removeClass("cardTemplate");
-            console.log(v);
+            // console.log(v);
             cardClone.css("background-image", "url("+v.flag+")");
-
+            
             $("#countriesView").append(cardClone);
         });
     });
-    
+    $("span:contains('Explore')").on("click", function(){
+        console.log($(this).attr("id"));
+    });
+
 }
 
 
