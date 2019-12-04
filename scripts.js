@@ -32,12 +32,13 @@ function drawByRegion(region){
             cardClone.removeClass("cardTemplate");
             // console.log(v);
             cardClone.css("background-image", "url("+v.flag+")");
-            
+            cardClone.attr("id", v.name);
+            // $(".mdc-button__label:contains('Explore')").attr("id", v.name);
+            $(".mdc-button__label:contains('Explore')").on("click", function(){
+                console.log("Viewing news for this country: " + v.name);
+            });
             $("#countriesView").append(cardClone);
         });
-    });
-    $(".mdc-card__media-content:contains('Explore')").on("click", function(){
-        console.log($(this).attr("id"));
     });
 
 }
