@@ -21,6 +21,24 @@ function drawRegionCards(){
     }
 }
 
+function drawNewsModal(country){
+    var url = 'https://newsapi.org/v2/everything?' +
+          'q='+country+'&' +
+          'from=2019-12-04&' +
+          'sortBy=popularity&' +
+          'apiKey=e65da836c72f4e8894103a8e401cff95';
+
+    $.get(url, function(res){
+        
+        $.each(res, function(u,v){
+            console.log(v);
+
+        });
+    });
+
+
+}
+
 function drawByRegion(region){
     console.log("Going to fetch everything in: " + region);
     var url = "https://restcountries.eu/rest/v2/region/"+region;
@@ -33,13 +51,17 @@ function drawByRegion(region){
             // console.log(v);
             cardClone.css("background-image", "url("+v.flag+")");
             cardClone.attr("id", v.name);
-            // $(".mdc-button__label:contains('Explore')").attr("id", v.name);
-            $(".mdc-button__label:contains('Explore')").on("click", function(){
-                console.log("Viewing news for this country: " + v.name);
-            });
+            console.log("creating a card for " + v.name);
             $("#countriesView").append(cardClone);
         });
+        $(".mdc-button__label:contains('Explore')").on("click", function(){
+            var country = $(this).closest(".mdc-card").attr("id");
+            console.log("Viewing news for this country: " + country);
+            drawNewsModal(country);
+        });
     });
+
+
 
 }
 
