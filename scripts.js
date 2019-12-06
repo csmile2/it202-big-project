@@ -40,6 +40,26 @@ function drawNewsModal(country){
 
 }
 
+function explore(country){
+    var url = "https://restcountries.eu/rest/v2/name/"+country;
+    var dialogClone = $("#ex1").clone();
+    $.get(url, function(res){
+        console.log(res[0]);
+        // $("h1#countryName").text(res[0]["name"]);
+        dialogClone.find("#countryName").text(res[0]["name"]);
+        dialogClone.find("#countryInfo").append(
+            "Capital: "+res[0]["capital"]+"<br>"+
+            "Population: "+res[0]["population"]+"<br>"+
+            "Currency: "+res[0]["currencies"][0]["name"]
+        );
+        // $("p#countryInfo").append(
+        //     "Capital: "+res[0]["capital"]+"<br>"+
+        //     "Population: "+res[0]["population"]+"<br>"+
+        //     "Currency: "+res[0]["currencies"][0]["name"]+"<br>"
+        //     );
+    });
+}
+
 function drawByRegion(region){
     console.log("Going to fetch everything in: " + region);
     var url = "https://restcountries.eu/rest/v2/region/"+region;
@@ -55,10 +75,15 @@ function drawByRegion(region){
             console.log("creating a card for " + v.name);
             $("#countriesView").append(cardClone);
         });
-        $(".mdc-button__label:contains('Explore')").on("click", function(){
+        $(".mdc-button__label:contains('View News')").on("click", function(){
             var country = $(this).closest(".mdc-card").attr("id");
             console.log("Viewing news for this country: " + country);
             drawNewsModal(country);
+        });
+        $(".mdc-button__label:contains('Explore')").on("click", function(){
+            var country = $(this).closest(".mdc-card").attr("id");
+            console.log("Exploring : " + country);
+            explore(country);
         });
     });
 
