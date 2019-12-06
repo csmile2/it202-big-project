@@ -29,11 +29,12 @@ function drawNewsModal(country){
           'apiKey=e65da836c72f4e8894103a8e401cff95';
 
     $.get(url, function(res){
-        
-        $.each(res, function(u,v){
-            console.log(v);
-
-        });
+        console.log(res["articles"][0]);
+        var dialog = $(".dialogTemplate").clone();
+        dialog.find("mdc-dialog__title").text(country);
+        dialog.removeClass("dialogTemplate");
+        // dialog.open();
+        $("#countriesView").append(dialog);
     });
 
 
