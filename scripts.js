@@ -72,12 +72,30 @@ function drawByRegion(region){
         $(".mdc-button__label:contains('View News')").on("click", function(){
             var country = $(this).closest(".mdc-card").attr("id");
             console.log("Viewing news for this country: " + country);
-            // drawNewsModal(country);
+            var url = 'https://newsapi.org/v2/everything?' +
+                        'q='+country+'&' +
+                        'from=2019-12-04&' +
+                        'sortBy=popularity&' +
+                        'apiKey=e65da836c72f4e8894103a8e401cff95';
+            dialogClone = $("#ex1").clone();
+            var cloneID = country+"Dialog";
+            dialogClone.attr("id", cloneID);
+            $.get(url, function(res){
+                console.log(res["articles"][0]);
+                console.log(res["articles"][0]['title']);
+                dialogClone.find("h1#countryName").text(country);
+                dialogClone.find("#countryInfo").append(
+                    "BREAKING NEWS: "+"<br><a href="+res["articles"][0]["url"]+">"+res["articles"][0]["title"]+"</a><br>"+
+                                    "<br><a href="+res["articles"][1]["url"]+">"+res["articles"][1]["title"]+"</a><br>"+
+                                    "<br><a href="+res["articles"][2]["url"]+">"+res["articles"][2]["title"]+"</a><br>"+
+                                    "<br><a href="+res["articles"][3]["url"]+">"+res["articles"][3]["title"]+"</a><br>"
+                );
+                dialogClone.modal('show');
+            });
         });
         $(".mdc-button__label:contains('Explore')").on("click", function(){
             var country = $(this).closest(".mdc-card").attr("id");
             console.log("Exploring : " + country);
-            // var contentStr = explore(country);
             var url = "https://restcountries.eu/rest/v2/name/"+country;
             card = $(this).closest(".mdc-card");
             dialogClone = $("#ex1").clone();
@@ -89,11 +107,14 @@ function drawByRegion(region){
                 dialogClone.find("#countryInfo").append(
                     "Capital: "+res[0]["capital"]+"<br>"+
                     "Population: "+res[0]["population"]+"<br>"+
-                    "Currency: "+res[0]["currencies"][0]["name"]
+                    "Currency: "+res[0]["currencies"][0]["name"]+"<br>"+
+                    "Region: "+res[0]["region"]+"<br>"+
+                    "Timezone: "+res[0]["timezones"]+"<br>"+
+                    "Top Level Domain: "+res[0]["topLevelDomain"]+"<br>"+
+                    "Latitude/Longitude: "+res[0]["latlng"]
                 );
+                dialogClone.modal('show');
             });
-            $(cloneID).show();
-            console.log(dialogClone);
         });
     });
 
